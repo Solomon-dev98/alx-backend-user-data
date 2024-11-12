@@ -18,9 +18,26 @@ class Auth:
 
         Returns:
             bool: false(for now, authentication will be done later).
+            bool: True if path is None.
+            bool: True if excluded_paths is None or empty.
+            bool: False if path is in excluded_paths
+            bool: False if excluded_paths contains /api/v1/status/
         """
+        if path is None:
+            return True
 
-        return False
+        if not excluded_paths:
+            return True
+
+        # Normalize the path (remove trailing slashes)
+        path = path.rstrip('/')
+
+        # check if the path is in excluded_path
+        for excluded_path in excluded_paths:
+            if excluded_path.rstrip('/') == path:
+                return False
+        # if none of the conditions match, return True
+        return True
 
     def authorization_header(self, request=None) -> str:
         """ public method: retrieves authorization header.
