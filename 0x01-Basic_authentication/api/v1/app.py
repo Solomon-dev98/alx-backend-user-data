@@ -56,8 +56,8 @@ def before_request():
         return
     # list of exempt paths
     exempt_paths = ['/api/v1/status/',
-                     '/api/v1/unauthorized/',
-                     '/api/v1/forbidden/']
+                    '/api/v1/unauthorized/',
+                    '/api/v1/forbidden/']
 
     # if the request path is not in the exempt list, check authentication
     if request.path not in exempt_paths:
