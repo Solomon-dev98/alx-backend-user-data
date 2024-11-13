@@ -58,7 +58,8 @@ class BasicAuth(Auth):
         # check for if base64_authorization_header is not a valid Base64
         try:
             # Validate the base64 part by decoding
-            decoded = base64.b64decode(base64_authorization_header).decode('utf-8')
+            decoded = base64.b64decode(
+                base64_authorization_header).decode('utf-8')
 
             # Try to decode the byte string to UTF-8 and return it.
         except (base64.binascii.Error, UnicodeDecodeError):
