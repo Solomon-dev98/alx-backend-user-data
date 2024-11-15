@@ -122,22 +122,13 @@ class BasicAuth(Auth):
             Object: user Instance.
         """
 
-        # check for if user_email is None or not a String.
-        if user_email is None or not isinstance(user_email, str):
-            return None
-
-        # check for if user_pwd is None or not a string.
-        if user_pwd is None or not isinstance(user_pwd, str):
-            return None
-
-        # Search for user by email
-        users = User.search({'email': user_email})
-        if not users:
-            return None  # No user found with this email
-
-        user = users[0]  # Assuming we take the first match for simplicity
-        # validate the password
-        if not user.is_valid_password(user_pwd):
-            return None  # Password does not match
-
-        return user
+        if type(user_email) == str and type(user_pwd) == str:
+            try:
+                users = User.search({'email': user_email})
+            except Exception:
+                return None
+            if len(users) <= 0:
+                return None
+            if users[0].is_valid_password(user_pwd):
+                return users[0]
+        return None
