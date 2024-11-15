@@ -123,11 +123,11 @@ class BasicAuth(Auth):
         """
 
         # check for if user_email is None or not a String.
-        if not isinstance(user_email, str) or user_email is None:
+        if user_email is None or not isinstance(user_email, str):
             return None
 
         # check for if user_pwd is None or not a string.
-        if not isinstance(user_pwd, str) or user_pwd is None:
+        if user_pwd is None or not isinstance(user_pwd, str):
             return None
 
         # Search for user by email
